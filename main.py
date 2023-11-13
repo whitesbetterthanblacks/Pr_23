@@ -22,40 +22,40 @@ class Main(tk.Frame):
 
     #Инициализация виджетов
     def init_main(self):
-        toolbar = tk.Frame(bg='gray75', bd=2)
+        toolbar = tk.Frame(bg='hot pink', bd=2)
         toolbar.pack(side=tk.TOP, fill=tk.X)
  
         #Кнопка обновления
         self.img_ref = tk.PhotoImage(file='img/refresh.png')
-        btn_ref = tk.Button(toolbar, text='Обновить', bg='gray75',
+        btn_ref = tk.Button(toolbar, text='Обновить', bg='hot pink',
                              bd = 0, image = self.img_ref,
                             command=self.view)
         btn_ref.pack(side=tk.LEFT)
        
         #Кнопка добавления
         self.img_add = tk.PhotoImage(file='img/add.png')
-        btn_add = tk.Button(toolbar, text='Добавить', bg='gray75',
+        btn_add = tk.Button(toolbar, text='Добавить', bg='hot pink',
                              bd = 0, image = self.img_add,
                               command=self.open_child)
         btn_add.pack(side=tk.LEFT)
                 
         #Кнопка изменения
         self.img_upd = tk.PhotoImage(file='img/update.png')
-        btn_upd = tk.Button(toolbar, text='Изменить', bg='gray75',
+        btn_upd = tk.Button(toolbar, text='Изменить', bg='hot pink',
                              bd = 0, image = self.img_upd,
                               command=self.open_update_child)
         btn_upd.pack(side=tk.LEFT)
 
         #Кнопка удаления
         self.img_del = tk.PhotoImage(file='img/delete.png')
-        btn_del = tk.Button(toolbar, text='Удалить', bg='gray75',
+        btn_del = tk.Button(toolbar, text='Удалить', bg='hot pink',
                              bd = 0, image = self.img_del,
                               command=self.delete_records)
         btn_del.pack(side=tk.LEFT)
 
         #Кнопка поиска
         self.img_search = tk.PhotoImage(file='img/search.png')
-        btn_search = tk.Button(toolbar, text='Найти', bg='gray75',
+        btn_search = tk.Button(toolbar, text='Найти', bg='hot pink',
                              bd = 0, image = self.img_search,
                               command=self.open_search)
         btn_search.pack(side=tk.LEFT)
@@ -99,7 +99,7 @@ class Main(tk.Frame):
         id = self.tree.set(self.tree.selection()[0], '#1')
         self.db.cursor.execute('''
             UPDATE users
-            SET name = ?, phone = ?, email = ?, salary = ?
+            SET name = ?, email = ?, phone = ?, salary = ?
             WHERE id = ?
         ''',(name, phone, email, salary, id))
         self.db.connect.commit()
@@ -177,7 +177,7 @@ class Update(Child):
         self.default()
 
     def init_update(self):
-        self.title('Редактирование Сотрудника')
+        self.title('Редактирование')
         self.btn_add.destroy()
         self.btn_upd = tk.Button(self, text='Изменить')
         self.btn_upd.bind('<Button-1>', lambda ev: self.view.update_record(self.entry_name.get(),
@@ -205,7 +205,7 @@ class Search(tk.Toplevel):
 
     #Инициализация виджетов дочернего окна для поиска
     def init_search(self):
-        self.title('Поиск сотрудника')
+        self.title('Поиск')
         self.geometry('300x100')
         self.resizable(False, False)
         self.iconbitmap('img/logo.ico')
@@ -255,7 +255,7 @@ if __name__ == '__main__':
     db = Db()
     app = Main(root)
     app.pack()
-    root.title('Список сотрудников компании')
+    root.title('Сотрудники компании')
     root.geometry('1000x720')
     root.resizable(False, False)
     root.iconbitmap('img/logo.ico')
